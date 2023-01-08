@@ -1,0 +1,7 @@
+Alwis,Keerthi,1978,771230567,4444,medical dermatology
+Gune,Wimal,1990,777354653,6666,cosmetic dermatology
+Penso,Charith,1987,775647386,5555,paediatric dermatology
+Perera,Hiruth,1999,76858585,7777,cosmetic dermatology
+Perera,Susil,1970,771294567,3333,paediatric dermatology
+Silva,Thilan,1985,771234767,2222,medical dermatology
+Perera,Kumudu,1990,771254567,1111,cosmetic dermatology

@@ -1,8 +1,8 @@
 public class Doctor extends Person{
-    private String medicalLicenseNo;
+    private int medicalLicenseNo;
     private String special;
 
-    public Doctor(String name,String surname,String dob,String mobileNo,String medicalLicenseNo, String special) {
+    public Doctor(String name,String surname,String dob,int mobileNo,int medicalLicenseNo, String special) {
         this.setName(name);
         this.setSurname(surname);
         this.setDob(dob);
@@ -11,11 +11,11 @@ public class Doctor extends Person{
         this.special = special;
     }
 
-    public String getMedicalLicenseNo() {
+    public int getMedicalLicenseNo() {
         return medicalLicenseNo;
     }
 
-    public void setMedicalLicenseNo(String medicalLicenseNo) {
+    public void setMedicalLicenseNo(int medicalLicenseNo) {
         this.medicalLicenseNo = medicalLicenseNo;
     }
 

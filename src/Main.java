@@ -1,26 +1,40 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("--- WestminsterSkinConsultationManager ---\n");
-        System.out.println("Commands");
-        System.out.println("'A' - add a new doctor\n'B' - print the doctor list\n'C' - save and update the doctor list\n'D' -  delete a doctor");
-        System.out.println("Enter a String: ");
+        WestminsterSkinConsultationManager mgr = new WestminsterSkinConsultationManager();
+        System.out.println("--- WestminsterSkinConsultationManager ---");
+        ArrayList docArray = new ArrayList<>();
+        docArray = mgr.getDocArray();
         String input = null;
-        boolean invalid = true;
-        while(invalid){
+        boolean run = true;
+        while(run){
+            System.out.println("\nCommands");
+            System.out.println("'A' - add a new doctor\n'B' - print the doctor list\n'D' -  delete a doctor\n'E' - Exit");
+            System.out.println("\nEnter a Command: ");
             Scanner sc = new Scanner(System.in);
             if(sc.hasNext("[A-D]*")) {
                 input = sc.next();
-                invalid =false;
+
+                if(input.equals("A")){
+                    mgr.updateDoclist(docArray);
+
+                }else if(input.equals("B")){
+                    mgr.printDoclist(docArray);
+                }
+                else if(input.equals("D")){
+                    mgr.delDoc(docArray);
+                }
+                else if(input.equals("E")){
+                    run = false;
+                }
             }else {
                 System.out.println("Please Enter a Valid Command: ");
             }
         }
 
-        if(input == "A"){
 
-        }
 
     }
 }

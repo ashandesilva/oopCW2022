@@ -2,7 +2,7 @@ public class Person {
     private String name ;
     private String surname;
     private String dob;
-    private String mobileNo;
+    private int mobileNo;
 
     public String getName() {
         return name;
@@ -28,11 +28,13 @@ public class Person {
         this.dob = dob;
     }
 
-    public String getMobileNo() {
+    public int getMobileNo() {
         return mobileNo;
     }
 
-    public void setMobileNo(String mobileNo) {
+    public void setMobileNo(int mobileNo) {
         this.mobileNo = mobileNo;
     }
+
+
 }

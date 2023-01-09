@@ -1,8 +1,11 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class WestminsterSkinConsultationManager implements SkinConsultationManager{
     String filename = "doclist.txt";
@@ -180,5 +183,110 @@ public class WestminsterSkinConsultationManager implements SkinConsultationManag
             ArrayList<String> docnames = new ArrayList<>(List.of(data.split(",")));
             System.out.println(i+1 + ") " + docnames.get(1)+ " " + docnames.get(0)+ " | Licence No: " + docnames.get(4)+ " | Mobile No: " + docnames.get(3)+ " | Specialisation: " + docnames.get(5)+ " | DOB: " + docnames.get(2));
         }
+    }
+
+    public void gui(ArrayList<String> docArray) {
+
+        JFrame docframe = new JFrame("Skin Consultation Centre");
+        docframe.setSize(900, 600);
+
+        JPanel jp = new JPanel();
+        BoxLayout verticalLayout = new BoxLayout(jp,BoxLayout.Y_AXIS);
+        jp.setLayout(verticalLayout);
+        docframe.add(jp);
+
+        JLabel title = new JLabel("Doctors list");
+        title.setFont(new Font("SANS_SERIF", Font.PLAIN, 30));
+        title.setSize(300, 30);
+        title.setLocation(300, 30);
+        jp.add(title);
+
+        DefaultTableModel col = new DefaultTableModel(){
+            public boolean isCellEditable(int row, int column) {return false;}
+        };
+        col.addColumn("Surname");
+        col.addColumn("Name");
+        col.addColumn("DOB");
+        col.addColumn("mobile No");
+        col.addColumn("Licence No");
+        col.addColumn("Specialisation");
+
+        for (int i=0; i< docArray.size();i++) {
+            String data = docArray.get(i);
+            ArrayList<String> docnames = new ArrayList<>(List.of(data.split(",")));
+            Vector row = new Vector();
+            row.add(docnames.get(0));
+            row.add(docnames.get(1));
+            row.add(docnames.get(2));
+            row.add(docnames.get(3));
+            row.add(docnames.get(4));
+            row.add(docnames.get(5));
+            col.addRow(row);
+        }
+
+        JTable doctable = new JTable();
+        doctable.setModel(col);
+        JScrollPane jScrollPane= new JScrollPane(doctable);
+        jp.add(jScrollPane);
+
+        docframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        docframe.setVisible(true);
+
+        JButton btnsort = new JButton("Sort by Surname");
+        btnsort.setBackground(new Color(232, 227, 137));//set background color of the button
+        JScrollPane jScrollPanebtnsort= new JScrollPane(btnsort);
+        jp.add(jScrollPanebtnsort);
+        btnsort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //sort the list by surname
+                docArray.sort(new Comparator<String>() {
+                    @Override
+                    public int compare(String lhs, String rhs) {
+                        return filter(lhs).compareTo(filter(rhs));
+                    }
+
+                    private String filter(String s) {
+                        // consider the first comma
+                        return s.replaceFirst("^.*?, ", "");
+                    }
+                });
+                col.setRowCount(0);
+                for (int i=0; i< docArray.size();i++) {
+                    String data = docArray.get(i);
+                    ArrayList<String> docnames = new ArrayList<>(List.of(data.split(",")));
+                    Vector row = new Vector();
+                    row.add(docnames.get(0));
+                    row.add(docnames.get(1));
+                    row.add(docnames.get(2));
+                    row.add(docnames.get(3));
+                    row.add(docnames.get(4));
+                    row.add(docnames.get(5));
+                    col.addRow(row);
+                }
+            }
+        });
+
+        JButton btnbook = new JButton("Book a consultation");
+        btnbook.setBackground(new Color(156, 232, 137));
+        JScrollPane jScrollPanebtnbook= new JScrollPane(btnbook);
+        jp.add(jScrollPanebtnbook);
+        btnbook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PatientForm(docArray);
+            }
+        });
+
+        // close the doctorlist frame
+        JButton btncancel = new JButton("Cancel");
+        JScrollPane jScrollPanebtn= new JScrollPane(btncancel);
+        jp.add(jScrollPanebtn);
+        btncancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                docframe.dispose();
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-Gune,Wimal,1990,777354653,6666,cosmetic dermatology
+De Silva,Wimal,1990,777354653,6666,cosmetic dermatology
 Penso,Charith,1987,775647386,5555,paediatric dermatology
 Perera,Hiruth,1999,76858585,7777,cosmetic dermatology
 Perera,Kumudu,1990,771254567,1111,cosmetic dermatology
